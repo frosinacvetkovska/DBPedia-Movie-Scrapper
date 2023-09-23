@@ -1,0 +1,38 @@
+<div class="loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+  <div class="mb-3">
+    <form [formGroup]="filterForm" (ngSubmit)="filter()" >
+      <mat-card class="mt-4 mat-elevation-z5">
+          <mat-card-content>
+            <div class="row">
+  
+              <section class="col-lg-2 col-md-6">
+                <label>Sort By</label>
+                  <br>
+                <mat-radio-group color="primary" aria-label="Select an option" formControlName="sortByControl">
+                  <mat-radio-button name="sortBy" value="ASC">Ascending</mat-radio-button>
+                    <br>
+                  <mat-radio-button name="sortBy" value="DESC">Descending</mat-radio-button>
+                </mat-radio-group>
+              </section>
+  
+  
+              <section class="col-lg-3 col-md-6 mt-3">
+                <mat-form-field appearance="fill" class="pr-3">
+                  <mat-label>Search by film name</mat-label>
+                  <input matInput formControlName="searchKeyWordControl">
+                </mat-form-field>
+              </section>
+
+            </div>
+          </mat-card-content>
+    </mat-card>
+
+    <div class="mt-3">
+      <button class="ml-5" type="submit" mat-raised-button color="primary">Filter</button>
+    </div>
+  
+    </form>
+  </div>

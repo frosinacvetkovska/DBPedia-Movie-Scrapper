@@ -1,0 +1,34 @@
+<div class="content-container">
+    <div class="content-heading">
+        <h2>Details for Film</h2>
+</div>
+<div class="loading-shade" *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+</div>
+
+
+<div class="content-body" *ngIf="!isLoading">
+    <mat-card>
+        <div class="row">
+            <div class="col-4">
+                <img src="{{filmProperties[0].filmPoster}}" #tooltip="matTooltip" [matTooltip]="imageNotAvailableOnDbpedia ? 'There is no Image on DbPedia': ''" onerror="this.src='../../../../../assets/images/film.png';" (error)="showTooltip()">
+            </div>
+        
+        <div class="col-8 film-details">
+            <div class="row">
+                <h2>{{filmProperties[0].filmName.value}}</h2>
+            </div>
+            <div class="row">
+                <p>Director: {{filmProperties[0].directorName.value}}</p>
+            </div>
+            <div class="row">
+                <p>Genre: {{filmProperties[0].filmGenre.value}}</p>
+            </div>
+            <div class="row">
+                <p>{{filmProperties[0].abstract.value}}</p>
+            </div>
+        </div>
+        </div>
+    </mat-card>
+</div>
+</div>

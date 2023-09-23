@@ -1,0 +1,62 @@
+<div class="content-container">
+    <div class="content-heading">
+        <h2>Film Database</h2>
+    </div>
+    <div class="loading-shade" *ngIf="(dataSource.loading$ | async)">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>
+
+<div class="content-body" *ngIf="!(dataSource.loading$ | async)">
+
+  <app-filter-films (filmsFiltered)="getFiltered($event)"></app-filter-films>
+
+<div class="container-fluid">
+  <div class="mat-elevation-z8">
+    <div class="table-container">
+<table *ngIf="!(dataSource.loading$ | async)" mat-table [dataSource]="dataSource" class="w-50" >
+  
+  <!-- Position Column -->
+  <ng-container matColumnDef="Poster">
+    <th mat-header-cell *matHeaderCellDef>
+      Poster
+    </th>
+    <td mat-cell *matCellDef="let element; let i = index"> 
+      <img class="film-poster" [src]="element.filmPoster.value" alt="{{element.filmName.value}}" #tooltip="matTooltip" [matTooltip]="showErrorTooltip[i] ? 'There is no image available on DBPedia' : ''" onerror="this.src='../../../../../assets/images/film.png';" matTooltipPosition="right" (error)="setTooltip(i)" />
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Film Name">
+    <th mat-header-cell *matHeaderCellDef>
+      Film Name
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.filmName.value}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Director">
+    <th mat-header-cell *matHeaderCellDef>
+      Director Name
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.directorName.value}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Genre">
+    <th mat-header-cell *matHeaderCellDef>
+      Genre
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.filmGenre.value}}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"></tr>
+</table>
+    </div>
+  </div>
+  </div>
+  </div>
